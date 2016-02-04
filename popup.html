@@ -2,24 +2,25 @@
 <html>
   <head>
     <title>batchRemote</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 100%;
-      }
-      #status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 400px;
-      }
-    </style>
-    <script src="popup.js"></script>
+    <script src="jquery-2.2.0.min.js"></script>
   </head>
   <body>
-    <div id="status"></div>
+    <script src="popup.js"></script>
+    <div id="status">
+        <div>
+            <span>CPOE:</span>
+            <table id="cpoe" style="border:1px solid;" cellpadding='5';></table>
+        </div>
+        <div>
+            <span>EROE:</span>
+            <table id="eroe" style="border:1px solid;" cellpadding='5';></table>
+        </div>
+        <div>
+            <span>NewBatch:</span>
+            <table id="else" style="border:1px solid;" cellpadding='5';></table>
+        </div>
 
+    </div>
   </body>
 </html>
 

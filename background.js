@@ -3,6 +3,7 @@ chrome.tabs.onUpdated.addListener(checkForValidUrl);
 function checkForValidUrl(tabId, changeInfo, tab) {
     if(getDomainFromUrl(tab.url).toLowerCase()=="batchremote.jim60105.com"){
         console.log(tab.url);
+        chrome.pageAction.show(tabId);
     }
 };
 
@@ -17,20 +18,48 @@ function getDomainFromUrl(url){
     return host;
 }
 
-//儲存errorList
-var errorList=[];
+//msgListener
+var errorList=[[],[],[]];   //cpoe,eroe,else
+var hide = false;
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        if (request.addErrName != undefined)
-            errorList[errorList.length] = request.addErrName;
+        //儲存errorList
+        if (request.addErrName != undefined) {
+            errorList[request.location][errorList[request.location].length] = request.addErrName;
+            sendResponse({});
+        }
         if (request.chkErrName != undefined) {
             var state = false;
-            for (var i in errorList) {
-                if (errorList[i] == request.chkErrName) {
+            for (var i in errorList[request.location]) {
+                if (errorList[request.location][i] == request.chkErrName) {
                     state = true;
                 }
             }
             sendResponse({ignore: state});
+        }
+
+        //清除ErrorList
+        if (request.action == "clearList") {
+            errorList=[[],[],[]];
+            sendResponse({response: true});
+        }
+
+        //設定/隱藏 成功項之狀態
+        if (request.action == "setHideSuccess") {
+            hide = true;
+            sendResponse({response: true});
+        }
+        if (request.action == "cancelHideSuccess") {
+            hide = false;
+            sendResponse({response: true});
+        }
+        if (request.action == "checkHideSuccess") {
+            sendResponse({status: hide});
+        }
+
+        //popup顯示ErrorList
+        if (request.action == "getErrorList") {
+            sendResponse({response: errorList});
         }
     }
 );
