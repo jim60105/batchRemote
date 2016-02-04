@@ -1,6 +1,6 @@
 chrome.tabs.onUpdated.addListener(checkForValidUrl);
 function checkForValidUrl(tabId, changeInfo, tab) {
-    if(getDomainFromUrl(tab.url).toLowerCase()=="webbatch.vghtc.gov.tw"){
+    if(getDomainFromUrl(tab.url).toLowerCase()=="batchremote.jim60105.com"){
         console.log(tab.url);
     }
 };
