@@ -1,7 +1,7 @@
 //確認網址
 chrome.tabs.onUpdated.addListener(checkForValidUrl);
 function checkForValidUrl(tabId, changeInfo, tab) {
-    if(getDomainFromUrl(tab.url).toLowerCase()=="batchremote.jim60105.com"){
+    if(getDomainFromUrl(tab.url).toLowerCase()=="webbatch.vghtc.gov.tw" || getDomainFromUrl(tab.url).toLowerCase()=="cc3fweb"){
         console.log(tab.url);
         chrome.pageAction.show(tabId);
     }
@@ -42,6 +42,7 @@ chrome.runtime.onMessage.addListener(
         if (request.action == "clearList") {
             errorList=[[],[],[]];
             sendResponse({response: true});
+            alert("已清除失敗List");
         }
 
         //設定/隱藏 成功項之狀態
