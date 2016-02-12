@@ -3,7 +3,7 @@
 
   "name": "batchRemote",
   "description": "batchRemote",
-  "version": "1.0",
+  "version": "1.01",
   "author": "jim60105",
   "background": { "scripts": ["background.js"] },
   "content_scripts":[{

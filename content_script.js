@@ -45,6 +45,14 @@ function checkForValidUrl(url) {
     }else if(getDomainFromUrl(url).toLowerCase()=="cc3fweb"){
         console.log(url);
         batchAmount = $("tr td:contains('執行失敗')").parent().length-1;
+        //每分鐘重新整理+checkError
+        reloadPause = false;
+        checkFinish = true;
+        setInterval(function(){
+            if(!reloadPause)
+                window.location.reload();
+        }, 60000);
+        //check失敗狀況
         updateListLocation();
     }
 }
